@@ -136,6 +136,9 @@ def parse_comma_separated_list(s):
 @click.option('--cond',         help='Train conditional model', metavar='BOOL',                 type=bool, default=False, show_default=True)
 @click.option('--mirror',       help='Enable dataset x-flips', metavar='BOOL',                  type=bool, default=False, show_default=True)
 @click.option('--resume',       help='Resume from given network pickle', metavar='[PATH|URL]',  type=str)
+@click.option('--lookahead',    help='Enable lookahead', metavar='BOOL',                        type=bool, default=True, show_default=True)
+@click.option('--lookahead-alpha',help='alpha value for lookahead', metavar='FLOAT',            type=click.FloatRange(min=0., max=1.), default=0.5, show_default=True)
+@click.option('--lookahead-k',  help='k value for lookahead', metavar='INT',                    type=click.IntRange(min=1), default=5, show_default=True)
 
 # Misc hyperparameters.
 @click.option('--batch-gpu',    help='Limit batch size per GPU', metavar='INT',                 type=click.IntRange(min=1))
@@ -190,6 +193,9 @@ def main(**kwargs):
     c.image_snapshot_ticks = c.network_snapshot_ticks = opts.snap
     c.random_seed = c.training_set_kwargs.random_seed = opts.seed
     c.data_loader_kwargs.num_workers = opts.workers
+    c.lookahead = opts.lookahead
+    c.lookahead_alpha = opts.lookahead_alpha
+    c.lookahead_k = opts.lookahead_k
 
     # Sanity checks.
     if c.batch_size % c.num_gpus != 0:
