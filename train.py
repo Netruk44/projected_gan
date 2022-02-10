@@ -136,7 +136,7 @@ def parse_comma_separated_list(s):
 @click.option('--cond',         help='Train conditional model', metavar='BOOL',                 type=bool, default=False, show_default=True)
 @click.option('--mirror',       help='Enable dataset x-flips', metavar='BOOL',                  type=bool, default=False, show_default=True)
 @click.option('--resume',       help='Resume from given network pickle', metavar='[PATH|URL]',  type=str)
-@click.option('--lookahead',    help='Enable lookahead', metavar='BOOL',                        type=bool, default=True, show_default=True)
+@click.option('--lookahead',    help='Enable lookahead', metavar='BOOL',                        type=bool, default=False, show_default=True)
 @click.option('--lookahead-alpha',help='alpha value for lookahead', metavar='FLOAT',            type=click.FloatRange(min=0., max=1.), default=0.5, show_default=True)
 @click.option('--lookahead-k',  help='k value for lookahead', metavar='INT',                    type=click.IntRange(min=1), default=5, show_default=True)
 
